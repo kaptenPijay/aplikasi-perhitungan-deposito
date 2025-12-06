@@ -5,11 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aplikasi Perhitungan Kredit Internal</title>
     <link rel="stylesheet" href="/src/style.css" />
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Sistem Informasi Perhitungan Kredit" />
+    <meta
+      property="og:description"
+      content="Hitung kredit dengan mudah dan cepat."
+    />
+    <meta
+      property="og:image"
+      content="https://aplikasi-perhitungan-kredit.vercel.app/logo.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://aplikasi-perhitungan-kredit.vercel.app/"
+    />
+    <meta property="og:type" content="website" />
+
+    <!-- Untuk WhatsApp & Mobile -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Sistem Informasi Perhitungan Deposito"
+    />
+    <meta
+      name="twitter:description"
+      content="Hitung Deposito dengan mudah dan cepat."
+    />
+    <meta
+      name="twitter:image"
+      content="https://aplikasi-perhitungan-kredit.vercel.app/og-image.jpg"
+    />
   </head>
   <body>
     <div class="container">
       <div class="card custom-card p-5 rounded shadow mb-3 mt-2">
-        <h2 class="text-center text-dark">Simulasi Perhitungan Kredit</h2>
+        <h2 class="text-center text-white">Simulasi Perhitungan Deposito</h2>
         <div class="d-flex justify-content-center">
           <img
             class="img-fluid rounded"
@@ -22,27 +52,23 @@
         <!-- Baris 1 -->
         <div class="row">
           <div class="col-12 col-md-6 mb-3">
-            <label for="plafond" class="text-dark fw-bolder mb-2 fw-bolder"
-              >Plafond</label
+            <label for="nominal" class="text-dark fw-bolder mb-2 fw-bolder"
+              >Nominal</label
             >
             <input
               type="text"
-              id="plafond"
-              name="Plafond"
+              id="nominal"
+              name="nominal"
               class="form-control"
-              placeholder="Input Plafond"
+              placeholder="Input Nominal"
             />
           </div>
 
           <div class="col-12 col-md-6 mb-3">
-            <label for="tipe_credit" class="text-dark fw-bolder mb-2"
-              >Tipe Kredit</label
+            <label for="jenis" class="text-dark fw-bolder mb-2"
+              >Tipe Deposito</label
             >
-            <select
-              name="tipe_credit"
-              id="tipe_credit"
-              class="form-control"
-            ></select>
+            <select name="jenis" id="jenis" class="form-control"></select>
           </div>
         </div>
 
@@ -58,16 +84,15 @@
           </div>
 
           <div class="col-12 col-md-6 mb-3">
-            <label for="ekalloyd" class="text-dark fw-bolder mb-2"
-              >Tenor Asuransi EKALLLOYD</label
+            <label for="persentase" class="text-dark fw-bolder mb-2 fw-bolder"
+              >Suku Bunga</label
             >
             <input
               type="text"
-              id="ekalloyd"
-              name="ekalloyd"
+              id="persentase"
+              name="persentase"
               class="form-control"
-              placeholder="Ekalloyd"
-              readonly
+              placeholder="Input Suku Bunga, Jika Kosong Maka Suku Bunga = 3.5%"
             />
           </div>
         </div>
@@ -75,144 +100,35 @@
         <!-- Baris 3 -->
         <div class="row">
           <div class="col-12 col-md-6 mb-3">
-            <label for="blokir" class="text-dark fw-bolder mb-2"
-              >Blokir 1x Angsuran</label
+            <label for="bungaKotor" class="text-dark fw-bolder mb-2 fw-bolder"
+              >Bunga Kotor</label
             >
             <input
               type="text"
-              id="blokir"
-              name="blokir"
+              id="bungaKotor"
+              name="bungaKotor"
               class="form-control"
-              placeholder="Jumlah Blokir"
+              placeholder="Bunga Kotor"
               readonly
             />
           </div>
 
           <div class="col-12 col-md-6 mb-3">
-            <label for="provisi" class="text-dark fw-bolder mb-2"
-              >Provisi</label
+            <label for="pajak" class="text-dark fw-bolder mb-2 fw-bolder"
+              >Pajak</label
             >
             <input
               type="text"
-              id="provisi"
-              name="provisi"
+              id="pajak"
+              name="pajak"
               class="form-control"
-              placeholder="Biaya Provisi"
+              placeholder="Bunga Setelah Pajak"
               readonly
             />
           </div>
         </div>
 
         <!-- Baris 4 -->
-        <div class="row">
-          <div class="col-12 col-md-6 mb-3">
-            <label for="admin" class="text-dark fw-bolder mb-2"
-              >Biaya Admin</label
-            >
-            <input
-              type="text"
-              id="admin"
-              name="admin"
-              class="form-control"
-              placeholder="Biaya Admin"
-              readonly
-            />
-          </div>
-
-          <div class="col-12 col-md-6 mb-3">
-            <label for="cetak" class="text-dark fw-bolder mb-2"
-              >Biaya Cetak</label
-            >
-            <input
-              type="text"
-              id="cetak"
-              name="cetak"
-              class="form-control"
-              value="250.000"
-              readonly
-            />
-          </div>
-        </div>
-
-        <!-- Baris 5 -->
-        <div class="row">
-          <div class="col-12 col-md-6 mb-3">
-            <label for="asuransi" class="text-dark fw-bolder mb-2"
-              >Asuransi</label
-            >
-            <input
-              type="text"
-              id="asuransi"
-              name="asuransi"
-              class="form-control"
-              placeholder="Asuransi"
-              readonly
-            />
-          </div>
-
-          <div class="col-12 col-md-6 mb-3">
-            <label for="total" class="text-dark fw-bolder mb-2"
-              >Total Potongan dan Blokir</label
-            >
-            <input
-              type="text"
-              id="total"
-              name="total"
-              class="form-control"
-              placeholder="Total"
-              readonly
-            />
-          </div>
-        </div>
-
-        <!-- Baris 6 -->
-        <div class="row">
-          <div class="col-12 col-md-6 mb-3">
-            <label for="salary" class="text-dark fw-bolder mb-2"
-              >Estimasi Gaji</label
-            >
-            <input
-              type="text"
-              id="salary"
-              name="salary"
-              class="form-control"
-              placeholder="Salary"
-            />
-          </div>
-
-          <div class="col-12 col-md-6 mb-3">
-            <label for="new_angsuran" class="text-dark fw-bolder mb-2"
-              >Angsuran Baru</label
-            >
-            <input
-              type="text"
-              id="new_angsuran"
-              name="new_angsuran"
-              class="form-control"
-              placeholder="Angsuran Baru"
-              readonly
-            />
-          </div>
-        </div>
-
-        <!-- Baris 7 -->
-        <div class="d-flex justify-content-center">
-          <div class="col-12 col-md-6">
-            <label for="sisa_gaji" class="text-dark fw-bolder mb-2"
-              >Sisa Gaji</label
-            >
-            <input
-              type="text"
-              id="sisa_gaji"
-              name="sisa_gaji"
-              class="form-control form-control-lg text-center"
-              placeholder="Sisa Gaji"
-              readonly
-            />
-          </div>
-        </div>
-
-        <!-- Baris 8 -->
         <div class="d-flex justify-content-center">
           <div class="col-12 col-md-12">
             <h4
