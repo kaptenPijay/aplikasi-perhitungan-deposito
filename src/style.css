@@ -37,6 +37,35 @@ body {
   border-radius: 15px;
   max-width: 100%;
 }
+.silah-animate {
+  animation: silahFadeUp 0.4s ease-out forwards;
+}
+
+@keyframes silahFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.silah-hide {
+  animation: silahFadeOut 0.3s ease-in forwards;
+}
+
+@keyframes silahFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
 
 @media (max-width: 991px) {
   .container {

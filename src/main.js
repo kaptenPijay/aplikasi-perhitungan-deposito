@@ -1,57 +1,72 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { replaceDot, grossAmount} from './counter.js';
-import * as XLSX from 'xlsx';
-import Swal from 'sweetalert2'
+import { replaceDot, grossAmount, depoType } from './counter.js';
 
-document.addEventListener("DOMContentLoaded",()=>{
-const tenor = document.getElementById("tahun");
-const jenis = document.getElementById("jenis");
-const nominal = document.getElementById("nominal");
-const persentase = document.getElementById("persentase");
-const bungaKotor = document.getElementById("bungaKotor");
-const pajak = document.getElementById("pajak");
-const estimasiBersih = document.getElementById("estimasiBersih");
+document.addEventListener("DOMContentLoaded", () => {
+  const els = {
+    tenor: document.getElementById("tahun"),
+    jenis: document.getElementById("jenis"),
+    nominal: document.getElementById("nominal"),
+    persentase: document.getElementById("persentase"),
+    bungaKotor: document.getElementById("bungaKotor"),
+    pajak: document.getElementById("pajak"),
+    estimasiBersih: document.getElementById("estimasiBersih"),
+  };
 
-const pilihanTenor = [
-  { value: 30, label: "1 Bulan" },
-  { value: 90, label: "3 Bulan" },
-  { value: 180, label: "6 Bulan" },
-  { value: 365, label: "1 Tahun" }
-];
+  /* =======================
+     OPTION TENOR & JENIS
+  ======================= */
+  const pilihanTenor = [
+    { value: 30, label: "1 Bulan" },
+    { value: 90, label: "3 Bulan" },
+    { value: 180, label: "6 Bulan" },
+    { value: 365, label: "1 Tahun" },
+  ];
 
-tenor.innerHTML = pilihanTenor
-  .map(item => `<option value="${item.value}">${item.label}</option>`)
-  .join("");
+  els.tenor.innerHTML = pilihanTenor
+    .map(item => `<option value="${item.value}">${item.label}</option>`)
+    .join("");
 
-jenis.innerHTML = `
-                  <option value="">Tipe Deposito</option>
-                  <option value="deposito">Deposito</option>
-                  <option value="silah">Silah</option>
-                  <option value="doubleUntung">Double Untung</option>
-`
+  els.jenis.innerHTML = `
+    <option value="" disabled selected>Tipe Deposito</option>
+    <option value="deposito">Deposito</option>
+    <option value="silah">Silah</option>
+  `;
 
-
-nominal.addEventListener('keyup',()=>{
-    replaceDot(nominal);
-    grossAmount(nominal,tenor,persentase,bungaKotor,pajak,estimasiBersih)
-})
-tenor.addEventListener('change',()=>{
-    grossAmount(nominal,tenor,persentase,bungaKotor,pajak,estimasiBersih)
-})
-persentase.addEventListener("input", function () {
-  let value = this.value.replace("%", "");
-  if (value === "") {
-    this.value = "";
-    return;
+  /* =======================
+     CENTRAL UPDATE
+  ======================= */
+  function update() {
+    depoType(
+      els.jenis,
+      els.nominal,
+      els.tenor,
+      els.persentase,
+      els.bungaKotor,
+      els.pajak,
+      els.estimasiBersih
+    );
   }
-  this.value = value + "%";
-  grossAmount(nominal,tenor,persentase,bungaKotor,pajak,estimasiBersih)
-});
-persentase.addEventListener("keydown", function (e) {
-  if (e.key === "Backspace" && this.value.endsWith("%")) {
-    this.value = this.value.replace("%", "");
-  }
-  grossAmount(nominal,tenor,persentase,bungaKotor,pajak,estimasiBersih)
-});
 
-})
+  /* =======================
+     EVENT LISTENER
+  ======================= */
+  els.nominal.addEventListener("keyup", () => {
+    replaceDot(els.nominal);
+    update();
+  });
+
+  els.tenor.addEventListener("change", update);
+  els.jenis.addEventListener("change", update);
+
+  els.persentase.addEventListener("input", function () {
+    let value = this.value.replace("%", "");
+    this.value = value ? value + "%" : "";
+    update();
+  });
+
+  els.persentase.addEventListener("keydown", function (e) {
+    if (e.key === "Backspace" && this.value.endsWith("%")) {
+      this.value = this.value.replace("%", "");
+    }
+  });
+});
